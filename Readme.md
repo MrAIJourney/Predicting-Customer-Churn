@@ -1,0 +1,1 @@
+Customer churn prediction is a critical application of machine learning in business. It helps identify customers likely to leave a service or stop purchasing. This project will teach you how to work with classification algorithms, handle categorical variables, and evaluate model performance using metrics specific to classification problems.
