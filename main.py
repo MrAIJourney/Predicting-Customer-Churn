@@ -31,3 +31,25 @@ import warnings
 # from IPython.display import Image, display,IFrame
 # from plotly.offline import plot
 # from xgboost import XGBClassifier
+
+
+
+
+# Suppress all warnings
+warnings.filterwarnings('ignore')
+
+# <---- load the data: ---->
+data = pd.read_csv('customer_churn_dataset-testing-master.csv')
+# print(data.head(25))
+
+warnings.filterwarnings('ignore', category=UserWarning, message='findfont: font family')
+
+# <---- know about shape and type of dataset ---->
+# print('Shape of dataset ---->  ', np.shape(data))
+# print('Size of dataset ---->  ', np.size(data))
+# print('Types of data in dataset ---->  ', data.dtypes)
+
+# <---- know number of each item in each column ---->
+for col in data.columns:
+    print(f'Count of item in columgn {col}\n', data[col].value_counts())
+    print('*'*25)
