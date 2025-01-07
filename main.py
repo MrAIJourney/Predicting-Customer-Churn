@@ -42,7 +42,7 @@ warnings.filterwarnings('ignore')
 data = pd.read_csv('customer_churn_dataset-testing-master.csv')
 # print(data.head(25))
 
-warnings.filterwarnings('ignore', category=UserWarning, message='findfont: font family')
+warnings.filterwarnings('ignore', category=UserWarning, message='find font: font family')
 
 # <---- know about shape and type of dataset ---->
 # print('Shape of dataset ---->  ', np.shape(data))
@@ -50,6 +50,11 @@ warnings.filterwarnings('ignore', category=UserWarning, message='findfont: font 
 # print('Types of data in dataset ---->  ', data.dtypes)
 
 # <---- know number of each item in each column ---->
+# for col in data.columns:
+#     print(f'Count of item in column {col}\n', data[col].value_counts())
+#     print('*'*25)
+
+# <---- know the unique value in each column ---->
 for col in data.columns:
-    print(f'Count of item in columgn {col}\n', data[col].value_counts())
+    print(f'Unique values in col {col}:\n{data[col].unique()}')
     print('*'*25)
