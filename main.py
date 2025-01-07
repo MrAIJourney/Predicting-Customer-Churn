@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+# from matplotlib.pyplot import title
 # import graphviz
 from sklearn.preprocessing import StandardScaler,OneHotEncoder,LabelEncoder,MinMaxScaler
 from sklearn.compose import ColumnTransformer
@@ -22,7 +23,7 @@ import sqlite3
 # from folium.plugins import MarkerCluster
 from sklearn.neighbors import KNeighborsClassifier
 # from plotly.graph_objs import *
-# import plotly.express as px 
+# import plotly.express as px
 # import plotly.graph_objects as go
 # from plotly.subplots import make_subplots
 from sklearn.pipeline import Pipeline
@@ -73,3 +74,8 @@ if data.duplicated().sum() != 0:
     print('All Duplicated file has been deleted')
 else:
     print('There is no duplicated rows in this file')
+
+# <---- Calculating the correlation ---->
+corr_matrix = data.select_dtypes('number').corr()
+sns.heatmap(data=corr_matrix, annot=True, fmt=".2f",linewidths=0.5)
+plt.show()
