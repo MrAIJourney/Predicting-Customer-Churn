@@ -55,6 +55,21 @@ warnings.filterwarnings('ignore', category=UserWarning, message='find font: font
 #     print('*'*25)
 
 # <---- know the unique value in each column ---->
-for col in data.columns:
-    print(f'Unique values in col {col}:\n{data[col].unique()}')
-    print('*'*25)
+# for col in data.columns:
+#     print(f'Unique values in col {col}:\n{data[col].unique()}')
+#     print('*'*25)
+
+# <--- Cleaning data --->
+# check for null values
+# print(data.isna().mean())
+
+# drop 'Customer ID' column
+customer_id = data['CustomerID']
+data = data.drop('CustomerID', axis=1)
+
+# check if there is duplicated item
+if data.duplicated().sum() != 0:
+    data.drop_duplicates()
+    print('All Duplicated file has been deleted')
+else:
+    print('There is no duplicated rows in this file')
