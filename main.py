@@ -2,6 +2,9 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+from scipy.spatial.transform import rotation
+from selenium.webdriver.support import color
+from setuptools.command.rotate import rotate
 # from matplotlib.pyplot import title
 # import graphviz
 from sklearn.preprocessing import StandardScaler,OneHotEncoder,LabelEncoder,MinMaxScaler
@@ -96,5 +99,12 @@ for col in number_column:
     print(f'Q1 in column {col}: {q1}\nQ3 in column {col} is: {q3}\n')
     print(f'Outlier in this column:\n{outlier}\n')
     print('*'*25)
-plt.boxplot(data.select_dtypes('number'), widths=0.2, label='number_column')
+
+# <---- using boxplot to show outliers ---->
+plt.figure(figsize=(10,10), dpi=100)
+plt.title('This Representation to check if found  outliers')
+plt.xlabel('Features')
+plt.ylabel('count of happens')
+plt.xticks(rotation= 45, color= 'b')
+sns.boxplot(data.select_dtypes('number'))
 plt.show()
