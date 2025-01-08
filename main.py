@@ -77,5 +77,24 @@ else:
 
 # <---- Calculating the correlation ---->
 corr_matrix = data.select_dtypes('number').corr()
-sns.heatmap(data=corr_matrix, annot=True, fmt=".2f",linewidths=0.5)
+# sns.heatmap(data=corr_matrix, annot=True, fmt=".2f",linewidths=0.5)
+# plt.show()
+
+# <---- Detect outliers in the data ---->
+number_column = data.select_dtypes(include='number').columns
+for col in number_column:
+    q1, q3 = data[col].quantile([0.25, 0.75])
+    iqr = q3 - q1
+    upper_limit = q3 + 1.5 * iqr
+    lower_limit = q1 - 1.5 * iqr
+    outlier = []
+    for value in data[col]:
+        if value > upper_limit:
+            outlier.append(value)
+        elif value < lower_limit:
+            outlier.append(value)
+    print(f'Q1 in column {col}: {q1}\nQ3 in column {col} is: {q3}\n')
+    print(f'Outlier in this column:\n{outlier}\n')
+    print('*'*25)
+plt.boxplot(data.select_dtypes('number'), widths=0.2, label='number_column')
 plt.show()
