@@ -3,6 +3,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from fontTools.merge import cmap
+from matplotlib.pyplot import legend
 from scipy.spatial.transform import rotation
 from selenium.webdriver.support import color
 from setuptools.command.rotate import rotate
@@ -36,6 +37,8 @@ import warnings
 # from IPython.display import Image, display,IFrame
 # from plotly.offline import plot
 # from xgboost import XGBClassifier
+from pywaffle import Waffle
+
 
 
 
@@ -85,8 +88,8 @@ corr_matrix = data.select_dtypes('number').corr()
 # plt.show()
 
 # <---- Detect outliers in the data ---->
-number_column = data.select_dtypes(include='number').columns
-for col in number_column:
+numeric_columns = data.select_dtypes(include='number').columns
+for col in numeric_columns:
     q1, q3 = data[col].quantile([0.25, 0.75])
     iqr = q3 - q1
     upper_limit = q3 + 1.5 * iqr
@@ -116,9 +119,26 @@ for col in number_column:
 #     plt.show()
 
 # <---- Visualizing the relation between age and payment delay ---->
-sns.scatterplot(data=data, x='Age', y='Payment Delay', hue= 'Payment Delay', palette='coolwarm')
-plt.show()
+# sns.scatterplot(data=data, x='Age', y='Payment Delay', hue= 'Payment Delay', palette='coolwarm')
+# plt.show()
 
 # <---- Visualizing the relation between age and total spent
-sns.scatterplot(data=data, x='Age', y='Total Spend', hue= 'Total Spend', palette='coolwarm')
+# sns.scatterplot(data=data, x='Age', y='Total Spend', hue= 'Total Spend', palette='coolwarm')
+# plt.show()
+
+
+# <----  from this waffle I see which Feature is a controlled over other features ---->
+numeric_column_sum = data[numeric_columns].sum().tolist()
+fig_waffle = plt.figure(
+    FigureClass=Waffle,
+    rows = 5,
+    columns = 20,
+    values= numeric_column_sum,
+    legend = {'labels': numeric_columns.tolist(),
+              'loc': 'upper left',
+              'bbox_to_anchor': (1,1)},
+    figsize=(25,25)
+)
+plt.title("Waffle observation on Data")
+plt.suptitle("Total Spend feature biggest feature have unique value ")
 plt.show()
