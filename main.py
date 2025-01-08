@@ -101,10 +101,13 @@ for col in number_column:
     print('*'*25)
 
 # <---- using boxplot to show outliers ---->
-plt.figure(figsize=(10,10), dpi=100)
-plt.title('This Representation to check if found  outliers')
-plt.xlabel('Features')
-plt.ylabel('count of happens')
-plt.xticks(rotation= 45, color= 'b')
-sns.boxplot(data.select_dtypes('number'))
-plt.show()
+# plt.figure(figsize=(10,10), dpi=100)
+# plt.title('This Representation to check if found  outliers')
+# plt.xlabel('Features')
+# plt.ylabel('count of happens')
+# plt.xticks(rotation= 45, color= 'b')
+# sns.boxplot(data.select_dtypes('number'))
+# plt.show()
+for col in number_column:
+    sns.displot(data=data, x=col, bins=100, facecolor='blue', kde= True, color= 'red', height=5, aspect= 3.5)
+    plt.show()
