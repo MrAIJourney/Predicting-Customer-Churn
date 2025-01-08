@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+from fontTools.merge import cmap
 from scipy.spatial.transform import rotation
 from selenium.webdriver.support import color
 from setuptools.command.rotate import rotate
@@ -108,6 +109,16 @@ for col in number_column:
 # plt.xticks(rotation= 45, color= 'b')
 # sns.boxplot(data.select_dtypes('number'))
 # plt.show()
-for col in number_column:
-    sns.displot(data=data, x=col, bins=100, facecolor='blue', kde= True, color= 'red', height=5, aspect= 3.5)
-    plt.show()
+
+# <---- Visualize the distribution of values in each column ---->
+# for col in number_column:
+#     sns.displot(data=data, x=col, bins=100, facecolor='blue', kde= True, color= 'red', height=5, aspect= 3.5)
+#     plt.show()
+
+# <---- Visualizing the relation between age and payment delay ---->
+sns.scatterplot(data=data, x='Age', y='Payment Delay', hue= 'Payment Delay', palette='coolwarm')
+plt.show()
+
+# <---- Visualizing the relation between age and total spent
+sns.scatterplot(data=data, x='Age', y='Total Spend', hue= 'Total Spend', palette='coolwarm')
+plt.show()
