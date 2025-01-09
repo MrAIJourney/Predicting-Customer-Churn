@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from fontTools.merge import cmap
 from matplotlib.pyplot import legend
 from scipy.spatial.transform import rotation
+from scipy.stats import alpha
 from seaborn import color_palette
 from selenium.webdriver.support import color
 from setuptools.command.rotate import rotate
@@ -145,8 +146,11 @@ for col in numeric_columns:
 # plt.show()
 
 # <---- Visualizing the relation between churn and subscription type and gender, using histogram ---->
-print(data.columns)
 # sns.histplot(data=data,x='Churn',hue='Subscription Type', palette='Paired')
-sns.histplot(data=data,x='Churn',hue='Gender', palette='Paired')
-plt.title('Visualizing the relation between churn and subscription type and gender')
+# sns.histplot(data=data,x='Churn',hue='Gender', palette='Paired')
+# plt.title('Visualizing the relation between churn and subscription type and gender')
+# plt.show()
+
+# <---- Visualizing relation between numeric variables using pairplot ---->
+sns.pairplot(data.select_dtypes('number'), kind="hist", height=1.5,hue='Churn')
 plt.show()
