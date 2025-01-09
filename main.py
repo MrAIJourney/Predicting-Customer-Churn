@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from fontTools.merge import cmap
 from matplotlib.pyplot import legend
 from scipy.spatial.transform import rotation
+from seaborn import color_palette
 from selenium.webdriver.support import color
 from setuptools.command.rotate import rotate
 # from matplotlib.pyplot import title
@@ -128,17 +129,24 @@ for col in numeric_columns:
 
 
 # <----  from this waffle I see which Feature is a controlled over other features ---->
-numeric_column_sum = data[numeric_columns].sum().tolist()
-fig_waffle = plt.figure(
-    FigureClass=Waffle,
-    rows = 5,
-    columns = 20,
-    values= numeric_column_sum,
-    legend = {'labels': numeric_columns.tolist(),
-              'loc': 'upper left',
-              'bbox_to_anchor': (1,1)},
-    figsize=(25,25)
-)
-plt.title("Waffle observation on Data")
-plt.suptitle("Total Spend feature biggest feature have unique value ")
+# numeric_column_sum = data[numeric_columns].sum().tolist()
+# fig_waffle = plt.figure(
+#     FigureClass=Waffle,
+#     rows = 5,
+#     columns = 20,
+#     values= numeric_column_sum,
+#     legend = {'labels': numeric_columns.tolist(),
+#               'loc': 'upper left',
+#               'bbox_to_anchor': (1,1)},
+#     figsize=(25,25)
+# )
+# plt.title("Waffle observation on Data")
+# plt.suptitle("Total Spend feature biggest feature have unique value ")
+# plt.show()
+
+# <---- Visualizing the relation between churn and subscription type and gender, using histogram ---->
+print(data.columns)
+# sns.histplot(data=data,x='Churn',hue='Subscription Type', palette='Paired')
+sns.histplot(data=data,x='Churn',hue='Gender', palette='Paired')
+plt.title('Visualizing the relation between churn and subscription type and gender')
 plt.show()
