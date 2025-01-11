@@ -152,5 +152,12 @@ for col in numeric_columns:
 # plt.show()
 
 # <---- Visualizing relation between numeric variables using pairplot ---->
-sns.pairplot(data.select_dtypes('number'), kind="hist", height=1.5,hue='Churn')
-plt.show()
+# sns.pairplot(data.select_dtypes('number'), kind="hist", height=1.5,hue='Churn')
+# plt.show()
+
+# <---- rescaling data using MinMax Scaler ---->
+numerical_features = data.select_dtypes('number')
+minmax_scaler = MinMaxScaler() # create an object of scaler
+scaled_numerical_features = minmax_scaler.fit_transform(numerical_features)
+scaled_numerical_df = pd.DataFrame(scaled_numerical_features,columns=numeric_columns) # convert it to dataframe
+print(scaled_numerical_df.describe())
