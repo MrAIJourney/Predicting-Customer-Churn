@@ -160,4 +160,16 @@ numerical_features = data.select_dtypes('number')
 minmax_scaler = MinMaxScaler() # create an object of scaler
 scaled_numerical_features = minmax_scaler.fit_transform(numerical_features)
 scaled_numerical_df = pd.DataFrame(scaled_numerical_features,columns=numeric_columns) # convert it to dataframe
-print(scaled_numerical_df.describe())
+# print(scaled_numerical_df.describe())
+
+# <---- Split data to train and test ---->
+encoder = LabelEncoder() # encoder object to convert categorical values to numerical values
+data['Gender'] = encoder.fit_transform(data['Gender'])
+scaled_numerical_df['Gender'] = data['Gender'] # add gender column to numerical features
+
+x_train, x_test, y_train, y_test = train_test_split(scaled_numerical_df.drop('Churn', axis=1),scaled_numerical_df['Churn'], test_size=0.2, random_state=42)
+
+# <---- Create classification models ---->
+rf_model = RandomForestClassifier(random_state=42)
+rf_model.fit(x_train,y_train)
+
