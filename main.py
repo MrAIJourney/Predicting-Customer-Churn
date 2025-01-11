@@ -173,3 +173,13 @@ x_train, x_test, y_train, y_test = train_test_split(scaled_numerical_df.drop('Ch
 rf_model = RandomForestClassifier(random_state=42)
 rf_model.fit(x_train,y_train)
 
+
+# <---- Evaluate Model ---->
+y_test_predict = rf_model.predict(x_test)
+y_train_predict =rf_model.predict(x_train)
+rf_accuracy_score = accuracy_score(y_test,y_test_predict) # Computes the percentage of correct predictions
+rf_confusion_matrix = confusion_matrix(y_test,y_test_predict) # shows 4 number in order: 1-True Positive,2- False Positive, 3-False Negative, 4- True Negative
+rf_report = classification_report(y_test, y_test_predict) # precision = number of correct prediction / all prediction %%%% recall = number of corr pred / all available corrects  %%% F1-socre = one value to show both of them
+print(f'Accuracy of model {rf_accuracy_score}')
+print('Confusion Matrix:\n', rf_confusion_matrix)
+print('Classification Report:\n', rf_report)
