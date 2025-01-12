@@ -183,3 +183,10 @@ rf_report = classification_report(y_test, y_test_predict) # precision = number o
 print(f'Accuracy of model {rf_accuracy_score}')
 print('Confusion Matrix:\n', rf_confusion_matrix)
 print('Classification Report:\n', rf_report)
+
+# <---- Visualizing the result ---->
+sns.heatmap(rf_confusion_matrix, annot=True, fmt='d', cmap='Blues')
+plt.title('Confusion matrix')
+plt.xlabel('Prediction')
+plt.ylabel('Actual')
+plt.show()
